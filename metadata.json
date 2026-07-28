@@ -1,0 +1,6 @@
+{
+  "name": "KNDRK Design - Professionelle Websites",
+  "description": "Moderne, individuelle und bezahlbare Websites für Handwerksbetriebe und Unternehmen.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
