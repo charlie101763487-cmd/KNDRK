@@ -43,9 +43,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialMessage =
     e.preventDefault();
     setIsSubmitting(true);
 
+    const subject = `Anfrage über Website: ${formData.name} (${formData.industry || 'Handwerk/KMU'})`;
+    const body = `Hallo KNDRK Design,\n\nhier ist eine neue Kontaktanfrage über Ihre Website:\n\nName: ${formData.name}\nE-Mail: ${formData.email}\nFirma/Betrieb: ${formData.companyName || 'Nicht angegeben'}\nBranche: ${formData.industry || 'Handwerksbetrieb'}\n\nNachricht:\n${formData.message || 'Keine Nachricht eingegeben.'}\n\nViele Grüße,\n${formData.name}`;
+
+    const mailtoUrl = `mailto:${COMPANY_CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
+
+      try {
+        window.location.href = mailtoUrl;
+      } catch (err) {
+        console.log('Mailto error:', err);
+      }
 
       // Trigger celebratory confetti effect
       try {
@@ -58,7 +69,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialMessage =
       } catch (err) {
         console.log('Confetti error:', err);
       }
-    }, 1000);
+    }, 800);
   };
 
   return (
@@ -149,27 +160,36 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialMessage =
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
                   <h3 className="text-2xl font-bold text-white font-display">
-                    Vielen Dank für Ihre Anfrage!
+                    Öffnen Sie Ihr Postfach
                   </h3>
                   <p className="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
-                    Wir haben Ihre Nachricht erhalten und melden uns innerhalb von 24 Stunden persönlich bei Ihnen zurück.
+                    Ihr E-Mail-Programm wurde automatisch mit Ihrer vorausgefüllten Anfrage an <strong className="text-cyan-400">{COMPANY_CONTACT.email}</strong> geöffnet. Bitte senden Sie die E-Mail dort ab, um Ihre Anfrage abzuschließen.
                   </p>
-                  <button
-                    onClick={() => {
-                      setIsSubmitted(false);
-                      setFormData({
-                        name: '',
-                        email: '',
-                        companyName: '',
-                        industry: 'Handwerksbetrieb',
-                        message: '',
-                        preferredContact: 'email'
-                      });
-                    }}
-                    className="px-6 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs font-semibold hover:text-white"
-                  >
-                    Weitere Anfrage senden
-                  </button>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <a
+                      href={`mailto:${COMPANY_CONTACT.email}?subject=${encodeURIComponent(`Anfrage: ${formData.name}`)}&body=${encodeURIComponent(`Hallo KNDRK Design,\n\nName: ${formData.name}\nE-Mail: ${formData.email}\nFirma: ${formData.companyName}\nBranche: ${formData.industry}\n\nNachricht:\n${formData.message}`)}`}
+                      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 hover:bg-cyan-300 transition-colors"
+                    >
+                      <Mail className="w-4 h-4 text-slate-950" />
+                      <span>E-Mail jetzt im Mailprogramm öffnen</span>
+                    </a>
+                    <button
+                      onClick={() => {
+                        setIsSubmitted(false);
+                        setFormData({
+                          name: '',
+                          email: '',
+                          companyName: '',
+                          industry: 'Handwerksbetrieb',
+                          message: '',
+                          preferredContact: 'email'
+                        });
+                      }}
+                      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs font-semibold hover:text-white"
+                    >
+                      Neue Anfrage verfassen
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">

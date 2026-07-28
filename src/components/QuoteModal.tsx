@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Send, Sparkles, CheckCircle2, Mail, User, Building } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { COMPANY_CONTACT } from '../data/portfolioData';
 import kndrkLogo from '../assets/images/kndrk_logo_1785268005344.jpg';
 
 interface QuoteModalProps {
@@ -29,9 +30,22 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, prefill
     e.preventDefault();
     setIsSubmitting(true);
 
+    const subject = `Angebotsanfrage: ${name} ${company ? `(${company})` : ''}`;
+    const body = `Hallo KNDRK Design,\n\nhier ist meine Angebotsanfrage über Ihre Website:\n\nName: ${name}\nE-Mail: ${email}\nFirma / Betrieb: ${company || 'Nicht angegeben'}\n\nWünsche / Details:\n${notes || 'Keine weiteren Details angegeben.'}\n\nViele Grüße,\n${name}`;
+
+    const mailtoUrl = `mailto:${COMPANY_CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
+      
+      // Open default email client with prefilled data
+      try {
+        window.location.href = mailtoUrl;
+      } catch (err) {
+        console.log('Mailto error:', err);
+      }
+
       try {
         confetti({
           particleCount: 60,
@@ -41,7 +55,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, prefill
       } catch (e) {
         // ignore
       }
-    }, 800);
+    }, 600);
   };
 
   return (
@@ -62,16 +76,25 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, prefill
             <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-400/40">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-2xl font-bold text-white font-display">Anfrage erhalten!</h3>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Vielen Dank! KNDRK Design prüft Ihre Angaben und meldet sich kurzfristig bei Ihnen.
+            <h3 className="text-2xl font-bold text-white font-display">Öffnen Sie Ihr Postfach</h3>
+            <p className="text-slate-300 text-sm leading-relaxed max-w-md mx-auto">
+              Ihr E-Mail-Programm wurde automatisch mit Ihrer vorausgefüllten Anfrage an <strong className="text-cyan-400">{COMPANY_CONTACT.email}</strong> geöffnet. Bitte senden Sie die E-Mail dort ab. Falls sich kein Fenster geöffnet hat, klicken Sie bitte hier:
             </p>
-            <button
-              onClick={onClose}
-              className="px-6 py-2.5 rounded-xl bg-cyan-400 text-slate-950 font-bold text-xs"
-            >
-              Fenster schließen
-            </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <a
+                href={`mailto:${COMPANY_CONTACT.email}?subject=${encodeURIComponent(`Angebotsanfrage: ${name}`)}&body=${encodeURIComponent(`Hallo KNDRK Design,\n\nhier ist meine Angebotsanfrage:\n\nName: ${name}\nE-Mail: ${email}\nFirma: ${company}\nDetails: ${notes}`)}`}
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 hover:bg-cyan-300 transition-colors"
+              >
+                <Mail className="w-4 h-4 text-slate-950" />
+                <span>E-Mail in Ihrem Programm öffnen</span>
+              </a>
+              <button
+                onClick={onClose}
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white font-bold text-xs"
+              >
+                Schließen
+              </button>
+            </div>
           </div>
         ) : (
           <div className="space-y-6">

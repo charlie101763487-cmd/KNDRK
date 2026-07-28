@@ -24,21 +24,21 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
   const [hasRecruiting, setHasRecruiting] = useState<boolean>(false);
   const [hasExpress, setHasExpress] = useState<boolean>(false);
 
-  // Approximate estimation logic for orientation
+  // Approximate estimation logic for orientation (Starter & Einstiegs-Tarife)
   const calculateEstimate = () => {
-    let base = 790;
-    if (projectType === 'landing') base = 490;
-    if (projectType === 'portfolio') base = 690;
-    if (projectType === 'relaunch') base = 890;
+    let base = 290; // Handwerk & Firmen (rediziert um 500 €)
+    if (projectType === 'landing') base = 190; // Landingpage
+    if (projectType === 'portfolio') base = 240; // Portfolio & Arbeiten
+    if (projectType === 'relaunch') base = 390; // Relaunch
 
-    const extraPages = Math.max(0, pageCount - 3) * 90;
-    const seoCost = hasSeo ? 190 : 0;
-    const emergencyCost = hasEmergencyBtn ? 80 : 0;
-    const recruitingCost = hasRecruiting ? 150 : 0;
-    const expressCost = hasExpress ? 250 : 0;
+    const extraPages = Math.max(0, pageCount - 3) * 45;
+    const seoCost = hasSeo ? 90 : 0;
+    const emergencyCost = hasEmergencyBtn ? 40 : 0;
+    const recruitingCost = hasRecruiting ? 75 : 0;
+    const expressCost = hasExpress ? 120 : 0;
 
     const min = base + extraPages + seoCost + emergencyCost + recruitingCost + expressCost;
-    const max = Math.round(min * 1.3);
+    const max = Math.round(min * 1.25);
 
     return { min, max };
   };
@@ -251,7 +251,10 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
             {/* Right Summary Box */}
             <div className="lg:col-span-4 bg-[#0b132b] rounded-2xl p-6 border border-cyan-500/30 flex flex-col justify-between">
               <div>
-                <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider block mb-2">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-semibold mb-3">
+                  <span>Erstkunden & Starter-Sonderpreis (-500 €)</span>
+                </div>
+                <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider block mb-1">
                   Unverbindlicher Schätzwert
                 </span>
                 
