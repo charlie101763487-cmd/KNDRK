@@ -13,7 +13,7 @@ import {
   ShieldAlert,
   Zap
 } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import { PORTFOLIO_DATA, COMPANY_CONTACT } from '../data/portfolioData';
 import { PortfolioItem } from '../types';
 
 interface PortfolioProps {
@@ -241,7 +241,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuote }) => {
       {/* Interactive Live Website Simulation Modal */}
       {demoProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/90 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-[#0b132b] border border-cyan-500/40 rounded-2xl w-full max-w-5xl h-[85vh] flex flex-col shadow-2xl overflow-hidden relative">
+          <div className="bg-[#0b132b] border border-cyan-500/40 rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col shadow-2xl overflow-hidden relative">
             
             {/* Modal Header Bar */}
             <div className="bg-[#131b35] px-4 py-3 border-b border-cyan-900/40 flex items-center justify-between gap-4">
@@ -287,139 +287,230 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuote }) => {
               </button>
             </div>
 
-            {/* Modal Body / Canvas */}
-            <div className="flex-1 bg-slate-950 p-4 overflow-y-auto flex justify-center items-start">
-              <div
-                className={`transition-all duration-300 bg-[#0b132b] border border-cyan-900/50 rounded-xl overflow-hidden shadow-2xl ${
-                  demoDevice === 'mobile' ? 'w-[375px] my-4 border-2 border-slate-700' : 'w-full'
-                }`}
-              >
-                {/* Simulated Website Navigation */}
-                <div className="bg-[#1c2541] p-3 border-b border-cyan-900/40 flex items-center justify-between text-xs text-white">
-                  <div className="font-bold text-cyan-400 flex items-center gap-1.5">
-                    <Zap className="w-4 h-4 text-cyan-400" />
-                    <span>{demoProject.title}</span>
-                  </div>
-                  <div className="flex gap-2 text-[11px]">
-                    <button
-                      onClick={() => setActiveDemoTab('home')}
-                      className={`px-2 py-1 rounded ${activeDemoTab === 'home' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-300'}`}
-                    >
-                      Start
-                    </button>
-                    <button
-                      onClick={() => setActiveDemoTab('service')}
-                      className={`px-2 py-1 rounded ${activeDemoTab === 'service' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-300'}`}
-                    >
-                      Leistungen
-                    </button>
-                    <button
-                      onClick={() => setActiveDemoTab('contact')}
-                      className={`px-2 py-1 rounded ${activeDemoTab === 'contact' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-300'}`}
-                    >
-                      Kontakt
-                    </button>
+            {/* Modal Body / Canvas & Explanation */}
+            <div className="flex-1 bg-slate-950 p-4 sm:p-6 overflow-y-auto">
+              <div className="grid lg:grid-cols-12 gap-6 items-start">
+                
+                {/* Left / Main Column: Simulated Website */}
+                <div className="lg:col-span-7 xl:col-span-8 flex justify-center items-start">
+                  <div
+                    className={`transition-all duration-300 bg-[#0b132b] border border-cyan-900/50 rounded-xl overflow-hidden shadow-2xl w-full ${
+                      demoDevice === 'mobile' ? 'max-w-[375px] my-2 border-2 border-slate-700' : 'w-full'
+                    }`}
+                  >
+                    {/* Simulated Website Navigation */}
+                    <div className="bg-[#1c2541] p-3 border-b border-cyan-900/40 flex items-center justify-between text-xs text-white">
+                      <div className="font-bold text-cyan-400 flex items-center gap-1.5 truncate max-w-[160px] sm:max-w-none">
+                        <Zap className="w-4 h-4 text-cyan-400 shrink-0" />
+                        <span className="truncate">{demoProject.title}</span>
+                      </div>
+                      <div className="flex gap-1.5 text-[11px] shrink-0">
+                        <button
+                          onClick={() => setActiveDemoTab('home')}
+                          className={`px-2 py-1 rounded transition-colors ${activeDemoTab === 'home' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-300 hover:text-white'}`}
+                        >
+                          Start
+                        </button>
+                        <button
+                          onClick={() => setActiveDemoTab('service')}
+                          className={`px-2 py-1 rounded transition-colors ${activeDemoTab === 'service' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-300 hover:text-white'}`}
+                        >
+                          Leistungen
+                        </button>
+                        <button
+                          onClick={() => setActiveDemoTab('contact')}
+                          className={`px-2 py-1 rounded transition-colors ${activeDemoTab === 'contact' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-300 hover:text-white'}`}
+                        >
+                          Kontakt
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Simulated Content Based on activeDemoTab */}
+                    <div className="p-5 sm:p-6 space-y-5 text-left">
+                      {activeDemoTab === 'home' && (
+                        <>
+                          {/* Hero Image in Demo */}
+                          <div className="relative rounded-xl overflow-hidden h-44 sm:h-56 bg-slate-900">
+                            <img
+                              src={demoProject.image}
+                              alt={demoProject.title}
+                              referrerPolicy="no-referrer"
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent p-4 flex flex-col justify-end">
+                              <span className="text-[10px] text-cyan-400 font-mono uppercase font-bold tracking-wider">
+                                Muster-Layout • {demoProject.category}
+                              </span>
+                              <h4 className="text-base sm:text-lg font-bold text-white">{demoProject.clientName}</h4>
+                            </div>
+                          </div>
+
+                          {/* Call to action bar in demo */}
+                          <div className="bg-gradient-to-r from-cyan-500/20 to-blue-600/20 p-4 rounded-xl border border-cyan-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <div>
+                              <p className="text-xs font-bold text-white">Express-Anfrage & Termine</p>
+                              <p className="text-[10px] text-slate-300">Direkt per E-Mail erreichbar</p>
+                            </div>
+                            <a
+                              href={`mailto:${COMPANY_CONTACT.email}?subject=${encodeURIComponent(`Interesse an Konzept: ${demoProject.title}`)}`}
+                              className="bg-cyan-400 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-lg flex items-center gap-1.5 shrink-0 hover:bg-cyan-300 transition-colors"
+                            >
+                              <Mail className="w-3.5 h-3.5" />
+                              <span>E-Mail schreiben</span>
+                            </a>
+                          </div>
+
+                          <div className="space-y-2 bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
+                            <p className="text-xs font-bold text-slate-200">Überzeugen Sie Ihre Kunden:</p>
+                            <p className="text-xs text-slate-300 leading-relaxed">
+                              {demoProject.description}
+                            </p>
+                          </div>
+                        </>
+                      )}
+
+                      {activeDemoTab === 'service' && (
+                        <div className="space-y-4">
+                          <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                            <Sparkles className="w-4 h-4 text-cyan-400" />
+                            <span>Muster-Angebote & Leistungen:</span>
+                          </h4>
+                          <div className="grid sm:grid-cols-2 gap-2.5">
+                            {demoProject.liveFeatures.map((feat, i) => (
+                              <div key={i} className="bg-[#131b35] p-3 rounded-lg border border-cyan-900/40 text-xs text-slate-200 flex items-center gap-2">
+                                <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                                <span>{feat}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {activeDemoTab === 'contact' && (
+                        <div className="space-y-3 bg-[#131b35] p-4 rounded-xl border border-cyan-900/40">
+                          <h4 className="text-sm font-bold text-white">So sieht Ihr Kontaktformular aus</h4>
+                          <p className="text-[11px] text-slate-400">
+                            Interessenten tragen ihre Kontaktdaten ein und die E-Mail landet sofort in Ihrem Postfach.
+                          </p>
+                          <input
+                            type="text"
+                            placeholder="Muster: Name des Kunden"
+                            disabled
+                            className="w-full bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-xs text-slate-400 opacity-75"
+                          />
+                          <input
+                            type="email"
+                            placeholder="Muster: kunde@beispiel.de"
+                            disabled
+                            className="w-full bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-xs text-slate-400 opacity-75"
+                          />
+                          <button
+                            disabled
+                            className="w-full bg-cyan-500/80 text-slate-950 font-bold text-xs py-2 rounded cursor-not-allowed opacity-90"
+                          >
+                            Anfrage absenden (Demo-Beispiel)
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                {/* Simulated Content Based on activeDemoTab */}
-                <div className="p-6 space-y-6 text-left">
-                  {activeDemoTab === 'home' && (
-                    <>
-                      {/* Hero Image in Demo */}
-                      <div className="relative rounded-xl overflow-hidden h-48 sm:h-60 bg-slate-900">
-                        <img
-                          src={demoProject.image}
-                          alt={demoProject.title}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-4 flex flex-col justify-end">
-                          <span className="text-[10px] text-cyan-400 font-mono uppercase">Meisterbetrieb aus der Region</span>
-                          <h4 className="text-lg sm:text-xl font-bold text-white">{demoProject.clientName}</h4>
-                        </div>
-                      </div>
+                {/* Right Column: Live Explanation & Business Advantage */}
+                <div className="lg:col-span-5 xl:col-span-4 bg-[#0b132b] p-5 sm:p-6 rounded-xl border border-cyan-500/30 space-y-5 text-left">
+                  
+                  <div className="space-y-2">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-[11px] font-bold border border-cyan-500/30">
+                      <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Konzept-Erklärung</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-white font-display">
+                      Wie dieses Konzept funktioniert
+                    </h3>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Dies ist ein vorgefertigtes <strong className="text-cyan-300">Design-Muster</strong> für die Branche <strong className="text-white">{demoProject.category}</strong>. Wenn Sie dieses Layout wählen, passen wir alles individuell an Ihr Unternehmen an.
+                    </p>
+                  </div>
 
-                      {/* Call to action bar in demo */}
-                      <div className="bg-gradient-to-r from-cyan-500/20 to-blue-600/20 p-4 rounded-xl border border-cyan-500/30 flex items-center justify-between gap-2">
+                  <hr className="border-slate-800" />
+
+                  {/* Key Highlights Explained */}
+                  <div className="space-y-3">
+                    <p className="text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
+                      Vorteile dieses Aufbaus:
+                    </p>
+
+                    <div className="space-y-2.5">
+                      <div className="flex items-start gap-2.5 text-xs text-slate-300 bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                         <div>
-                          <p className="text-xs font-bold text-white">Schneller Notdienst & Terminvereinbarung</p>
-                          <p className="text-[10px] text-slate-300">Schreiben Sie uns direkt per E-Mail!</p>
+                          <span className="font-bold text-white block">100% Smartphone-Optimiert</span>
+                          <span>Testen Sie oben den Button „Mobil“ – so perfekt sieht Ihre Seite auf Handys aus!</span>
                         </div>
-                        <a
-                          href={`mailto:${COMPANY_CONTACT.email}`}
-                          className="bg-cyan-400 text-slate-950 font-bold text-xs px-3 py-2 rounded-lg flex items-center gap-1"
-                        >
-                          <Mail className="w-3.5 h-3.5" />
-                          <span>E-Mail schreiben</span>
-                        </a>
                       </div>
 
-                      <div className="space-y-2">
-                        <p className="text-xs font-bold text-slate-300">Über uns & Qualitätsversprechen:</p>
-                        <p className="text-xs text-slate-400 leading-relaxed">
-                          Wir bieten erstklassige Handwerksleistungen, pünktliche Ausführung und transparente Festpreise.
-                        </p>
+                      <div className="flex items-start gap-2.5 text-xs text-slate-300 bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <div>
+                          <span className="font-bold text-white block">Direkte Kontakt-Buttons</span>
+                          <span>Besucher müssen nicht suchen, sondern können sofort per Mail anfragen.</span>
+                        </div>
                       </div>
-                    </>
-                  )}
 
-                  {activeDemoTab === 'service' && (
-                    <div className="space-y-4">
-                      <h4 className="text-base font-bold text-white">Unsere Fachleistungen:</h4>
-                      <div className="grid sm:grid-cols-2 gap-3">
-                        {demoProject.liveFeatures.map((feat, i) => (
-                          <div key={i} className="bg-[#131b35] p-3 rounded-lg border border-cyan-900/40 text-xs text-slate-200 flex items-center gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                            <span>{feat}</span>
-                          </div>
-                        ))}
+                      <div className="flex items-start gap-2.5 text-xs text-slate-300 bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <div>
+                          <span className="font-bold text-white block">Schlüsselfertig angepasst</span>
+                          <span>Ihr Logo, Ihre Fotos, Ihre Leistungen & Farben werden komplett für Sie eingesetzt.</span>
+                        </div>
                       </div>
                     </div>
-                  )}
+                  </div>
 
-                  {activeDemoTab === 'contact' && (
-                    <div className="space-y-3 bg-[#131b35] p-4 rounded-xl border border-cyan-900/40">
-                      <h4 className="text-sm font-bold text-white">Anfrage an {demoProject.title} senden</h4>
-                      <input
-                        type="text"
-                        placeholder="Ihr Name"
-                        disabled
-                        className="w-full bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-400"
-                      />
-                      <input
-                        type="email"
-                        placeholder="Ihre E-Mail"
-                        disabled
-                        className="w-full bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-400"
-                      />
-                      <button
-                        disabled
-                        className="w-full bg-cyan-500 text-slate-950 font-bold text-xs py-2 rounded"
-                      >
-                        Anfrage absenden (Demo Mode)
-                      </button>
-                    </div>
-                  )}
+                  {/* Results preview */}
+                  <div className="bg-gradient-to-r from-cyan-950/60 to-slate-900 p-4 rounded-xl border border-cyan-800/40 space-y-2">
+                    <p className="text-xs font-bold text-cyan-300">Erwartete Wirkung:</p>
+                    <ul className="space-y-1.5">
+                      {demoProject.results.map((res, rIdx) => (
+                        <li key={rIdx} className="text-[11px] text-slate-300 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                          <span>{res}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setDemoProject(null);
+                      onOpenQuote();
+                    }}
+                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-400 to-teal-300 hover:from-cyan-300 hover:to-teal-200 text-slate-950 font-extrabold text-xs shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 transition-all"
+                  >
+                    <span>Dieses Konzept für meine Firma anfragen</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
                 </div>
 
               </div>
             </div>
 
             {/* Modal Bottom Action Bar */}
-            <div className="bg-[#131b35] px-6 py-4 border-t border-cyan-900/40 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-xs text-slate-300">
-                Gefällt Ihnen dieser Stil? Wir erstellen Ihre eigene Website im gleichen hohen Standard!
+            <div className="bg-[#131b35] px-6 py-3.5 border-t border-cyan-900/40 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="text-xs text-slate-300 text-center sm:text-left">
+                💡 Gefällt Ihnen dieses Design? Wir setzen Ihre Wünsche schnell, individuell und preiswert um!
               </div>
               <button
                 onClick={() => {
                   setDemoProject(null);
                   onOpenQuote();
                 }}
-                className="px-6 py-2.5 rounded-xl bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/20"
+                className="px-5 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/20 shrink-0"
               >
-                <span>Eigene Website anfragen</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Jetzt Angebot anfragen</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 

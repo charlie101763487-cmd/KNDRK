@@ -17,7 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote }) => {
       setIsScrolled(window.scrollY > 20);
 
       // Simple active section detection
-      const sections = ['home', 'leistungen', 'warum-uns', 'referenzen', 'ablauf', 'preise', 'kontakt'];
+      const sections = ['home', 'leistungen', 'warum-uns', 'referenzen', 'uber-mich', 'ablauf', 'preise', 'kontakt'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -42,6 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote }) => {
     { id: 'leistungen', label: 'Leistungen' },
     { id: 'warum-uns', label: 'Warum KNDRK?' },
     { id: 'referenzen', label: 'Referenzen' },
+    { id: 'uber-mich', label: 'Über mich' },
     { id: 'ablauf', label: 'Ablauf' },
     { id: 'preise', label: 'Preise' },
     { id: 'kontakt', label: 'Kontakt' },

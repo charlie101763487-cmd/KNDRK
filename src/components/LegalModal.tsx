@@ -41,6 +41,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
               <p className="font-bold text-white text-base">Angaben gemäß § 5 TMG:</p>
               <div>
                 <p className="font-bold text-white">KNDRK Design</p>
+                <p className="text-cyan-400 font-semibold">Gewerbeinhaber: Kendrick Mitter</p>
                 <p>Webdesign & Digitale Medien für Unternehmen</p>
                 <p>Deutschland</p>
               </div>
@@ -52,7 +53,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <div>
                 <p className="font-bold text-white">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</p>
-                <p>KNDRK Design Team</p>
+                <p>Kendrick Mitter (Gewerbeinhaber)</p>
               </div>
 
               <div>

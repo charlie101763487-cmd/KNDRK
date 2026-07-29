@@ -5,6 +5,7 @@ import { Services } from './components/Services';
 import { WhyUs } from './components/WhyUs';
 import { Portfolio } from './components/Portfolio';
 import { Process } from './components/Process';
+import { AboutSection } from './components/AboutSection';
 import { PricingCalculator } from './components/PricingCalculator';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
@@ -70,7 +71,10 @@ export default function App() {
           onOpenQuote={() => handleOpenQuote()}
         />
 
-        {/* 5. Ablauf (4-Schritte Prozess) */}
+        {/* 5. Über mich (Kendrick Mitter Vorstellung) */}
+        <AboutSection />
+
+        {/* 6. Ablauf (4-Schritte Prozess) */}
         <Process
           onOpenQuote={() => handleOpenQuote()}
         />

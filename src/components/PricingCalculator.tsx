@@ -24,9 +24,9 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
   const [hasRecruiting, setHasRecruiting] = useState<boolean>(false);
   const [hasExpress, setHasExpress] = useState<boolean>(false);
 
-  // Approximate estimation logic for orientation (Starter & Einstiegs-Tarife)
-  const calculateEstimate = () => {
-    let base = 290; // Handwerk & Firmen (rediziert um 500 €)
+  // Exact fixed price calculation logic
+  const calculatePrice = () => {
+    let base = 290; // Handwerk & Firmen (reduziert um 500 €)
     if (projectType === 'landing') base = 190; // Landingpage
     if (projectType === 'portfolio') base = 240; // Portfolio & Arbeiten
     if (projectType === 'relaunch') base = 390; // Relaunch
@@ -37,16 +37,13 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
     const recruitingCost = hasRecruiting ? 75 : 0;
     const expressCost = hasExpress ? 120 : 0;
 
-    const min = base + extraPages + seoCost + emergencyCost + recruitingCost + expressCost;
-    const max = Math.round(min * 1.25);
-
-    return { min, max };
+    return base + extraPages + seoCost + emergencyCost + recruitingCost + expressCost;
   };
 
-  const estimate = calculateEstimate();
+  const totalPrice = calculatePrice();
 
   const handleSendConfig = () => {
-    const summary = `Projekt-Typ: ${projectType.toUpperCase()} | Ca. ${pageCount} Seiten | SEO: ${hasSeo ? 'Ja' : 'Nein'} | Notdienst-Button: ${hasEmergencyBtn ? 'Ja' : 'Nein'} | Recruiting: ${hasRecruiting ? 'Ja' : 'Nein'} | Express: ${hasExpress ? 'Ja' : 'Nein'} | Orientierungsrahmen: ca. ${estimate.min} € - ${estimate.max} €`;
+    const summary = `Projekt-Typ: ${projectType.toUpperCase()} | ${pageCount} Seiten | SEO: ${hasSeo ? 'Ja' : 'Nein'} | Notdienst-Button: ${hasEmergencyBtn ? 'Ja' : 'Nein'} | Recruiting: ${hasRecruiting ? 'Ja' : 'Nein'} | Express: ${hasExpress ? 'Ja' : 'Nein'} | Berechneter Festpreis: ${totalPrice} €`;
     if (onOpenQuoteWithDetails) {
       onOpenQuoteWithDetails(summary);
     } else {
@@ -124,7 +121,7 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
             </div>
             <div>
               <h3 className="text-xl font-bold text-white">Interaktiver Website-Konfigurator</h3>
-              <p className="text-xs text-slate-400">Stellen Sie sich Ihre Wunsch-Website zusammen & erhalten Sie einen unverbindlichen Orientierungsrahmen</p>
+              <p className="text-xs text-slate-400">Stellen Sie sich Ihre Wunsch-Website zusammen & berechnen Sie sofort Ihren festen Paketpreis</p>
             </div>
           </div>
 
@@ -255,14 +252,14 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
                   <span>Erstkunden & Starter-Sonderpreis (-500 €)</span>
                 </div>
                 <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider block mb-1">
-                  Unverbindlicher Schätzwert
+                  Berechneter Festpreis
                 </span>
                 
-                <p className="text-2xl font-extrabold text-white font-display">
-                  ca. {estimate.min} – {estimate.max} €
+                <p className="text-3xl sm:text-4xl font-extrabold text-white font-display">
+                  {totalPrice} €
                 </p>
                 <p className="text-[11px] text-slate-400 mt-1 mb-6">
-                  *Einmalige Investition. Keine laufenden Pflicht-Abo-Kosten.
+                  *Garantiertes Festpreis-Angebot. Keine laufenden Pflicht-Abo-Kosten.
                 </p>
 
                 <div className="space-y-2 border-t border-slate-800 pt-4 mb-6">

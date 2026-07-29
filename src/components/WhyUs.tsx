@@ -134,12 +134,9 @@ export const WhyUs: React.FC<WhyUsProps> = ({ onOpenQuote }) => {
             <div className="lg:col-span-7">
               <div className="relative rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#0b132b] shadow-2xl select-none">
                 
-                {/* Visual Label Top Right */}
-                <div className="absolute top-3 right-3 z-20 bg-cyan-500 text-slate-950 font-extrabold text-[11px] px-3 py-1 rounded-full shadow-md">
-                  KNDRK DESIGN
-                </div>
-                <div className="absolute top-3 left-3 z-20 bg-slate-900/90 border border-slate-700 text-slate-300 text-[11px] font-bold px-3 py-1 rounded-full">
-                  ALTE WEBSITE
+                {/* Visual Label Top Right (Always on NACHHER layer) */}
+                <div className="absolute top-3 right-3 z-10 bg-cyan-400 text-slate-950 font-extrabold text-[11px] px-3 py-1 rounded-full shadow-md pointer-events-none">
+                  KNDRK DESIGN (NEU)
                 </div>
 
                 {/* Container height */}
@@ -154,7 +151,7 @@ export const WhyUs: React.FC<WhyUsProps> = ({ onOpenQuote }) => {
                         </div>
                         <span className="font-extrabold text-white text-sm">Meisterbetrieb Kraft</span>
                       </div>
-                      <div className="bg-cyan-400 text-slate-950 px-3 py-1 rounded-lg text-xs font-bold">
+                      <div className="bg-cyan-400 text-slate-950 px-3 py-1 rounded-lg text-xs font-bold mr-28 sm:mr-36">
                         ✉️ E-Mail schreiben
                       </div>
                     </div>
@@ -191,27 +188,37 @@ export const WhyUs: React.FC<WhyUsProps> = ({ onOpenQuote }) => {
 
                   {/* BEFORE (Old Clunky Website Mockup) - Clipped Overlay */}
                   <div
-                    className="absolute inset-y-0 left-0 bg-[#e2e8f0] text-slate-900 flex flex-col justify-between p-6 overflow-hidden border-r-2 border-cyan-400 shadow-2xl transition-all"
-                    style={{ width: `${sliderPosition}%` }}
+                    className="absolute inset-y-0 left-0 bg-[#e2e8f0] text-slate-900 overflow-hidden z-10 border-r-2 border-cyan-400 shadow-2xl"
+                    style={{ 
+                      width: `${sliderPosition}%`, 
+                      display: sliderPosition === 0 ? 'none' : 'block' 
+                    }}
                   >
-                    <div className="border-b border-slate-400 pb-2">
-                      <p className="font-serif font-bold text-red-800 text-sm">Willkommen auf der Homepage (Stand 2008)</p>
-                    </div>
+                    <div className="w-[320px] sm:w-[540px] h-full p-6 flex flex-col justify-between relative">
+                      {/* Label for ALTE WEBSITE inside clipped area */}
+                      <div className="absolute top-3 left-3 bg-slate-800 text-slate-200 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-slate-600 shadow pointer-events-none">
+                        ALTE WEBSITE (ALT)
+                      </div>
 
-                    <div className="my-auto space-y-2 opacity-80">
-                      <p className="text-xs font-serif text-slate-800 italic">
-                        "Sehr geehrte Besucher, hier finden Sie Informationen über unsere Firma..."
-                      </p>
-                      <p className="text-[10px] font-mono text-slate-600 bg-slate-300 p-2 rounded">
-                        Optimiert für Internet Explorer 6.0 & Auflösung 800x600.
-                      </p>
-                      <p className="text-[10px] text-rose-700 font-bold">
-                        ⚠️ Nicht mobilfähig! Text zu klein auf Handys!
-                      </p>
-                    </div>
+                      <div className="border-b border-slate-400 pb-2 pt-6">
+                        <p className="font-serif font-bold text-red-800 text-sm">Willkommen auf der Homepage (Stand 2008)</p>
+                      </div>
 
-                    <div className="border-t border-slate-400 pt-2 text-[10px] text-slate-600">
-                      Letzte Aktualisierung: 14.11.2012
+                      <div className="my-auto space-y-2 opacity-80">
+                        <p className="text-xs font-serif text-slate-800 italic">
+                          "Sehr geehrte Besucher, hier finden Sie Informationen über unsere Firma..."
+                        </p>
+                        <p className="text-[10px] font-mono text-slate-600 bg-slate-300 p-2 rounded">
+                          Optimiert für Internet Explorer 6.0 & Auflösung 800x600.
+                        </p>
+                        <p className="text-[10px] text-rose-700 font-bold">
+                          ⚠️ Nicht mobilfähig! Text zu klein auf Handys!
+                        </p>
+                      </div>
+
+                      <div className="border-t border-slate-400 pt-2 text-[10px] text-slate-600">
+                        Letzte Aktualisierung: 14.11.2012
+                      </div>
                     </div>
                   </div>
 
@@ -220,21 +227,22 @@ export const WhyUs: React.FC<WhyUsProps> = ({ onOpenQuote }) => {
                 {/* Slider Input Range Control */}
                 <input
                   type="range"
-                  min="5"
-                  max="95"
+                  min="0"
+                  max="100"
                   value={sliderPosition}
                   onChange={(e) => setSliderPosition(Number(e.target.value))}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 m-0 p-0"
                   aria-label="Vorher Nachher Regler"
                 />
 
                 {/* Vertical Divider line with handle button */}
                 <div
-                  className="absolute inset-y-0 z-20 pointer-events-none flex items-center justify-center"
+                  className="absolute inset-y-0 z-20 pointer-events-none"
                   style={{ left: `${sliderPosition}%` }}
                 >
-                  <div className="w-8 h-8 rounded-full bg-cyan-400 text-slate-950 font-bold flex items-center justify-center shadow-lg border-2 border-white -ml-4">
-                    <Sliders className="w-4 h-4" />
+                  <div className="absolute inset-y-0 -left-[1px] w-[2px] bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
+                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-cyan-400 text-slate-950 font-bold flex items-center justify-center shadow-xl border-2 border-white">
+                    <Sliders className="w-4.5 h-4.5 text-slate-950" />
                   </div>
                 </div>
 

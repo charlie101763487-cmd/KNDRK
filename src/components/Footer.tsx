@@ -92,6 +92,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenQuote }) => {
                 </button>
               </li>
               <li>
+                <button onClick={() => scrollTo('uber-mich')} className="hover:text-cyan-400 transition-colors">
+                  Über mich
+                </button>
+              </li>
+              <li>
                 <button onClick={() => scrollTo('ablauf')} className="hover:text-cyan-400 transition-colors">
                   Ablauf
                 </button>
