@@ -53,7 +53,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onViewReferences }) => 
 
             {/* Subtitle */}
             <p className="text-slate-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              KNDRK Design erstellt moderne und leistungsstarke Websites für Handwerksbetriebe und Unternehmen – individuell gestaltet, mobiloptimiert und zu einem fairen Preis.
+              KNDRK Design erstellt und entwickelt moderne Websites für Handwerksbetriebe und Unternehmen – individuell gestaltet, mobiloptimiert und schlüsselfertig zur Übergabe für Ihren eigenen Webspace.
             </p>
 
             {/* Action Buttons */}

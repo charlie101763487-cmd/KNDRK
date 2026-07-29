@@ -19,10 +19,8 @@ interface PricingCalculatorProps {
 export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuoteWithDetails, onOpenQuote }) => {
   const [projectType, setProjectType] = useState<'kmu' | 'landing' | 'portfolio' | 'relaunch'>('kmu');
   const [pageCount, setPageCount] = useState<number>(5);
-  const [hasSeo, setHasSeo] = useState<boolean>(true);
   const [hasEmergencyBtn, setHasEmergencyBtn] = useState<boolean>(true);
   const [hasRecruiting, setHasRecruiting] = useState<boolean>(false);
-  const [hasExpress, setHasExpress] = useState<boolean>(false);
 
   // Exact fixed price calculation logic
   const calculatePrice = () => {
@@ -32,18 +30,16 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
     if (projectType === 'relaunch') base = 390; // Relaunch
 
     const extraPages = Math.max(0, pageCount - 3) * 45;
-    const seoCost = hasSeo ? 90 : 0;
     const emergencyCost = hasEmergencyBtn ? 40 : 0;
     const recruitingCost = hasRecruiting ? 75 : 0;
-    const expressCost = hasExpress ? 120 : 0;
 
-    return base + extraPages + seoCost + emergencyCost + recruitingCost + expressCost;
+    return base + extraPages + emergencyCost + recruitingCost;
   };
 
   const totalPrice = calculatePrice();
 
   const handleSendConfig = () => {
-    const summary = `Projekt-Typ: ${projectType.toUpperCase()} | ${pageCount} Seiten | SEO: ${hasSeo ? 'Ja' : 'Nein'} | Notdienst-Button: ${hasEmergencyBtn ? 'Ja' : 'Nein'} | Recruiting: ${hasRecruiting ? 'Ja' : 'Nein'} | Express: ${hasExpress ? 'Ja' : 'Nein'} | Berechneter Festpreis: ${totalPrice} €`;
+    const summary = `Projekt-Typ: ${projectType.toUpperCase()} | ${pageCount} Seiten | Notdienst-Button: ${hasEmergencyBtn ? 'Ja' : 'Nein'} | Recruiting: ${hasRecruiting ? 'Ja' : 'Nein'} | Berechneter Festpreis: ${totalPrice} €`;
     if (onOpenQuoteWithDetails) {
       onOpenQuoteWithDetails(summary);
     } else {
@@ -190,19 +186,6 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
                 </label>
                 <div className="grid sm:grid-cols-2 gap-3">
                   <button
-                    onClick={() => setHasSeo(!hasSeo)}
-                    className={`p-3.5 rounded-xl border text-left flex items-start gap-3 transition-all ${
-                      hasSeo ? 'bg-cyan-500/10 border-cyan-400/80 text-white' : 'bg-slate-900/80 border-slate-800 text-slate-400'
-                    }`}
-                  >
-                    <CheckCircle2 className={`w-4 h-4 mt-0.5 ${hasSeo ? 'text-cyan-400' : 'text-slate-600'}`} />
-                    <div>
-                      <p className="text-xs font-bold text-white">Google SEO-Paket</p>
-                      <p className="text-[10px] text-slate-400">Regionale Keyword-Optimierung</p>
-                    </div>
-                  </button>
-
-                  <button
                     onClick={() => setHasEmergencyBtn(!hasEmergencyBtn)}
                     className={`p-3.5 rounded-xl border text-left flex items-start gap-3 transition-all ${
                       hasEmergencyBtn ? 'bg-cyan-500/10 border-cyan-400/80 text-white' : 'bg-slate-900/80 border-slate-800 text-slate-400'
@@ -227,19 +210,6 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
                       <p className="text-[10px] text-slate-400">60-Sekunden Express-Bewerbung</p>
                     </div>
                   </button>
-
-                  <button
-                    onClick={() => setHasExpress(!hasExpress)}
-                    className={`p-3.5 rounded-xl border text-left flex items-start gap-3 transition-all ${
-                      hasExpress ? 'bg-cyan-500/10 border-cyan-400/80 text-white' : 'bg-slate-900/80 border-slate-800 text-slate-400'
-                    }`}
-                  >
-                    <CheckCircle2 className={`w-4 h-4 mt-0.5 ${hasExpress ? 'text-cyan-400' : 'text-slate-600'}`} />
-                    <div>
-                      <p className="text-xs font-bold text-white">Express-Umsetzung (&lt; 14 Tage)</p>
-                      <p className="text-[10px] text-slate-400">Priorisierte Fertigstellung</p>
-                    </div>
-                  </button>
                 </div>
               </div>
 
@@ -259,7 +229,7 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
                   {totalPrice} €
                 </p>
                 <p className="text-[11px] text-slate-400 mt-1 mb-6">
-                  *Garantiertes Festpreis-Angebot. Keine laufenden Pflicht-Abo-Kosten.
+                  *Garantiertes Festpreis-Angebot für Erstellung & Entwicklung. Das Hosting bzw. die Veröffentlichung erfolgt auf Ihrem eigenen Webspace / Hoster.
                 </p>
 
                 <div className="space-y-2 border-t border-slate-800 pt-4 mb-6">
@@ -267,8 +237,8 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onOpenQuot
                   <ul className="text-xs text-slate-400 space-y-1">
                     <li>• Typ: <span className="text-cyan-300 font-semibold">{projectType.toUpperCase()}</span></li>
                     <li>• Seiten: <span className="text-cyan-300 font-semibold">{pageCount} Unterseiten</span></li>
-                    <li>• SEO-Paket: <span className="text-cyan-300 font-semibold">{hasSeo ? 'Ja' : 'Nein'}</span></li>
                     <li>• Notdienst Button: <span className="text-cyan-300 font-semibold">{hasEmergencyBtn ? 'Ja' : 'Nein'}</span></li>
+                    <li>• Recruiting Formular: <span className="text-cyan-300 font-semibold">{hasRecruiting ? 'Ja' : 'Nein'}</span></li>
                   </ul>
                 </div>
               </div>

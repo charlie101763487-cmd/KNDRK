@@ -53,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenQuote }) => {
             </div>
 
             <p className="text-slate-300 text-xs leading-relaxed max-w-sm">
-              Spezialisiert auf moderne, ausdrucksstarke und bezahlbare Unternehmenswebsites für Handwerksbetriebe und den Mittelstand.
+              Spezialisiert auf die individuelle Erstellung & Entwicklung moderner Unternehmenswebsites für Handwerksbetriebe und den Mittelstand (Übergabe & Einrichtung auf Ihrem Kunden-Webspace).
             </p>
 
             <div className="pt-2">

@@ -108,7 +108,7 @@ export const AboutSection: React.FC = () => {
               </p>
               
               <p>
-                Bei meiner Arbeit lege ich als Inhaber größten Wert auf ein ästhetisches, modernes Design, blitzschnelle Ladezeiten und sauberen, zukunftssicheren Code. Ebenso wichtig sind mir eine verlässliche Kommunikation auf Augenhöhe, höchste Zuverlässigkeit und Lösungen, die exakt auf Ihre individuellen Unternehmensziele zugeschnitten sind. Jedes Detail gestalte ich mit Präzision und dem Anspruch, Ihnen einen messbaren Mehrwert zu bieten.
+                Bei meiner Arbeit lege ich als Inhaber größten Wert auf ein ästhetisches, modernes Design, blitzschnelle Ladezeiten und sauberen, zukunftssicheren Code. Ich fokussiere mich dabei rein auf die konzeptionelle Erstellung, das Webdesign und die professionelle Webentwicklung. Die Veröffentlichung bzw. das Hosting liegt bei Ihnen (bzw. wird auf Ihrem eigenen Webspace eingerichtet) – so behalten Sie stets die volle Kontrolle über Ihre Server & Domains.
               </p>
               
               <p>

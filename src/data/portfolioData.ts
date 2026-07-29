@@ -19,9 +19,9 @@ export const SERVICES_DATA: ServiceItem[] = [
       'Einzigartiges Design nach Ihrem Corporate Design',
       'Direkter E-Mail-Button für schnelle Mobil-Kontakte',
       'Projekt-Galerien für Ihre Referenzarbeiten',
-      'SEO-optimierte Struktur für regionale Kunden'
+      'Erstellung & Übergabe (Hosting auf Ihrem Webspace)'
     ],
-    recommendedFor: 'Handwerker & Mittelständler, die sich professionell am Markt positionieren wollen'
+    recommendedFor: 'Handwerker & Mittelständler, die eine professionell erstellte Website suchen'
   },
   {
     id: 'landingpages',
@@ -197,9 +197,9 @@ export const WHY_US_DATA: WhyUsItem[] = [
   {
     id: 'speed',
     title: 'Schnelle Umsetzung',
-    description: 'Vom Erstgespräch bis zur fertigen Website ver vergehen oft nur wenige Wochen. Wir arbeiten effizient und verlässlich.',
+    description: 'Vom Erstgespräch bis zur fertig erstellten Website vergehen oft nur wenige Wochen. Wir arbeiten effizient und verlässlich.',
     iconName: 'Zap',
-    highlightText: 'In 2-3 Wochen live'
+    highlightText: 'In 2-3 Wochen fertig'
   },
   {
     id: 'responsive',
@@ -211,7 +211,7 @@ export const WHY_US_DATA: WhyUsItem[] = [
   {
     id: 'service',
     title: 'Persönlicher Service',
-    description: 'Ein fester Ansprechpartner, der Ihre Sprache spricht und auch nach dem Veröffentlichen für Sie da ist.',
+    description: 'Ein fester Ansprechpartner, der Ihre Sprache spricht und Sie bei der Erstellung und Übergabe bestens begleitet.',
     iconName: 'HeartHandshake',
     highlightText: 'Direkter Ansprechpartner'
   }
@@ -244,11 +244,11 @@ export const PROCESS_STEPS: ProcessStep[] = [
   },
   {
     stepNumber: 4,
-    title: 'Fertige Website online',
-    subtitle: 'Go-Live & Erfolg',
-    description: 'Nach Ihrer Freigabe schalten wir Ihre neue Website live, verbinden Ihre Wunschdomain und stellen alles für Google bereit.',
+    title: 'Übergabe der Website',
+    subtitle: 'Erstellung & Fertigstellung',
+    description: 'Nach Ihrer Freigabe übergeben wir Ihnen alle fertigen Website-Dateien (oder richten sie auf Ihrem eigenen Webspace/Hoster ein). KNDRK Design übernimmt die Erstellung – das Hosting liegt bei Ihnen.',
     iconName: 'Rocket',
-    deliverables: ['Webseite Live geschaltet', 'Google-Verbindung & Einweisung']
+    deliverables: ['Übergabe aller Website-Dateien', 'Einrichtung auf Kunden-Webspace', 'Einweisung & Fertigstellung']
   }
 ];
 

@@ -52,6 +52,13 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
               </div>
 
               <div>
+                <p className="font-bold text-white">Leistungsumfang & Hinweise:</p>
+                <p className="text-slate-300 text-xs">
+                  KNDRK Design (Gewerbeinhaber Kendrick Mitter) bietet Dienstleistungen in den Bereichen Webdesign, UI/UX-Gestaltung und Webentwicklung an (Erstellung & technische Umsetzung). KNDRK Design ist kein Hostingaushändler/Provider und übernimmt kein eigenes Web-Hosting oder dauerhafte Speicherung/Veröffentlichung von Kunden-Websites auf eigenen Servern. Die Veröffentlichung und das Hosting liegen beim jeweiligen Kunden bzw. erfolgen auf dessen eigenem Webspace.
+                </p>
+              </div>
+
+              <div>
                 <p className="font-bold text-white">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</p>
                 <p>Kendrick Mitter (Gewerbeinhaber)</p>
               </div>
